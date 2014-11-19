@@ -21,22 +21,22 @@ module CapistranoPuma
           end
 
           desc "Restart puma instance for this application"
-          task :restart, roles: :app do
+          task :restart, :roles => :app do
             run "/etc/init.d/puma restart #{puma_app_name}"
           end
 
           desc "Show status of puma for this application"
-          task :status, roles: :app do
+          task :status, :roles => :app do
             run "/etc/init.d/puma status #{puma_app_name}"
           end
 
           desc "Show status of puma for all applications"
-          task :overview, roles: :app do
+          task :overview, :roles => :app do
             run "/etc/init.d/puma status"
           end
 
           desc "Create a shared tmp dir for puma state files"
-          task :after_symlink, roles: :app do
+          task :after_symlink, :roles => :app do
             run "rm -rf #{release_path}/tmp"
             run "ln -s #{shared_path}/tmp #{release_path}/tmp"
           end
